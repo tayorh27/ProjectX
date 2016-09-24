@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.sss.projectx.ActionActivity">
+
+    <RelativeLayout
+        android:id="@+id/part1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <ImageButton
+            android:id="@+id/iv_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings_black_24px"
+            android:layout_toLeftOf="@+id/checkbox_sound"
+            android:onClick="onClickButton"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/part2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <ImageButton
+            android:id="@+id/iv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings_black_24px"
+            android:layout_toLeftOf="@+id/checkbox_email"
+            android:onClick="onClickButton"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/part3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sms"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <ImageButton
+            android:id="@+id/iv_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings_black_24px"
+            android:layout_toLeftOf="@+id/checkbox_sms"
+            android:onClick="onClickButton"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/part4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <ImageButton
+            android:id="@+id/iv_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings_black_24px"
+            android:layout_toLeftOf="@+id/checkbox_call"
+            android:onClick="onClickButton"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:text="Done"
+            android:textColor="#000"
+            android:onClick="onClickButton"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>

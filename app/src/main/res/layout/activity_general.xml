@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sss.projectx.GeneralActivity">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Activation Time:"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_margin="16dp"/>
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/activation_delay"
+            android:prompt="@string/activation"
+            android:spinnerMode="dialog"
+            android:layout_margin="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Delay Time:"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_margin="16dp"/>
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/activation_delay"
+            android:prompt="@string/delay"
+            android:spinnerMode="dialog"
+            android:layout_margin="16dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linear"
+        android:layout_marginTop="20dp"
+        android:text="Next"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
+</RelativeLayout>
