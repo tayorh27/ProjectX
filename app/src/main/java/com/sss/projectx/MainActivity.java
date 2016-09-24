@@ -246,6 +246,9 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
         if (current.power) {
             sensors += "power";
         }
+        if (current.unlock) {
+            sensors += "unlock";
+        }
         CountDownClass countDownClass = new CountDownClass(MainActivity.this, actions, sensors, future, 1000);
         countDownClass.start();
         String text = current.profile + " has been activated";

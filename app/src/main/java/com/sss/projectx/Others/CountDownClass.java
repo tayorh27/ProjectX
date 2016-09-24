@@ -61,7 +61,14 @@ public class CountDownClass extends CountDownTimer {
         if(getSensor.contains("power")){
             startPower sp = new startPower(context);
             String charging = sp.CheckPower();
-            if(charging.contains("charging")){
+            if(!charging.contains("charging")){
+                Actions();
+            }
+        }
+        if(getSensor.contains("unlock")){
+            startUnlock su = new startUnlock(context);
+            su.CheckPower();
+            if(su.strState.contentEquals("unlocked")){
                 Actions();
             }
         }
