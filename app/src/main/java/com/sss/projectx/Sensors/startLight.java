@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -34,6 +35,7 @@ public class startLight {
         public void onSensorChanged(SensorEvent sensorEvent) {
             if (sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
                 current = (int)sensorEvent.values[0];
+                Log.e("Current Reading", "Current Reading For Light____ = " + current);
             }
         }
 

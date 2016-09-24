@@ -13,6 +13,13 @@
     <string name="activation">Select Activation Time</string>
     <string name="delay">Select Delay Time</string>
     <string name="action_clear">Clear</string>
+    <string name="action_pin">Set Lock</string>
+    <string name="action_activate">Pin Lock</string>
+    <string name="action_gen">General</string>
+    <string name="action_sensors">Sensors</string>
+    <string name="action_actions">Actions</string>
+    <string name="action_aboutus">About Us</string>
+    <string name="serviceQ">ProjectX Service</string>
     <string-array name="activation_delay">
         <item>5 seconds</item>
         <item>20 seconds</item>

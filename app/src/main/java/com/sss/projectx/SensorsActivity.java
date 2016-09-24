@@ -26,7 +26,7 @@ import com.sss.projectx.Others.UserBase;
 public class SensorsActivity extends AppCompatActivity {
 
     Button btn;
-    String act, del;
+    String act, del,pro;
     boolean light, proxi, power, unlock;
 
     CheckBox checkBox1, checkBox2, checkBox3, checkBox4;
@@ -51,6 +51,7 @@ public class SensorsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         act = bundle.getString("activation");
         del = bundle.getString("delay");
+        pro = bundle.getString("profile");
 
         btn = (Button) findViewById(R.id.btn);
         checkBox1 = (CheckBox) findViewById(R.id.checkbox_light);
@@ -68,6 +69,7 @@ public class SensorsActivity extends AppCompatActivity {
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("activation", act);
                 bundle1.putString("delay", del);
+                bundle1.putString("profile", pro);
                 bundle1.putBoolean("light", light);
                 bundle1.putBoolean("proxi", proxi);
                 bundle1.putBoolean("power", power);
@@ -145,7 +147,7 @@ public class SensorsActivity extends AppCompatActivity {
         TextView tv4 = (TextView) customView.findViewById(R.id.tv_max);
         sb.setMax((int) pmax);
         tv4.setText("Max Reading: " + String.valueOf(pmax));
-        sb.setProgress((int) current);
+        sb.setProgress((int) pcurrent);
         tv3.setText("Current Reading: " + String.valueOf(pcurrent));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -175,12 +177,8 @@ public class SensorsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int current = sb.getProgress();
-                if(current > 0) {
-                    SensorsInfo si = new SensorsInfo(sensorInfo.light_intensity, current);
-                    userBase.setSensorsSettings(si);
-                }else {
-                    Toast.makeText(SensorsActivity.this,"Proximity must be greater than 0.",Toast.LENGTH_SHORT).show();
-                }
+                SensorsInfo si = new SensorsInfo(sensorInfo.light_intensity, current);
+                userBase.setSensorsSettings(si);
                 dialog.dismiss();
             }
         });

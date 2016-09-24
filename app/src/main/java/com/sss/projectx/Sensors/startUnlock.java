@@ -12,29 +12,24 @@ import android.content.IntentFilter;
  */
 public class startUnlock extends Activity {
 
-    Context context;
     public String strState = "";
 
-    public startUnlock(Context context) {
-        this.context = context;
+    public startUnlock() {
     }
 
     public void CheckPower() {
-        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_UNLOCKED);
-        registerReceiver(new receiver(), filter);
-    }
+        BroadcastReceiver receiverME = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                KeyguardManager keyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
+                if (keyguardManager.isKeyguardSecure()) {
+                    //phone was unlocked, do stuff here
+                    strState = "unlocked";
 
-    class receiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            KeyguardManager keyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
-            if (keyguardManager.isKeyguardSecure()) {
-
-                //phone was unlocked, do stuff here
-                strState = "unlocked";
-
+                }
             }
-        }
+        };
+        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_PRESENT);
+        registerReceiver(receiverME, filter);
     }
 }

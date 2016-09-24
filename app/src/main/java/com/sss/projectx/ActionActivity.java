@@ -29,7 +29,7 @@ public class ActionActivity extends AppCompatActivity implements CompoundButton.
     UserBase userBase;
     Information information;
 
-    String act, del;
+    String act, del,pro;
     boolean light, proxi, power, unlock;
     CheckBox checkBox1, checkBox2, checkBox3, checkBox4;
     boolean sound, email, sms, call;
@@ -58,6 +58,7 @@ public class ActionActivity extends AppCompatActivity implements CompoundButton.
         Bundle bundle = getIntent().getExtras();
         act = bundle.getString("activation");
         del = bundle.getString("delay");
+        pro = bundle.getString("profile");
         light = bundle.getBoolean("light");
         proxi = bundle.getBoolean("proxi");
         power = bundle.getBoolean("power");
@@ -72,7 +73,7 @@ public class ActionActivity extends AppCompatActivity implements CompoundButton.
         call = checkBox4.isChecked();
         ArrayList<Detail> currentData = new ArrayList<>();
         Detail current = new Detail();
-        current.profile = "profile" + counter;
+        current.profile = pro;//"profile" + counter;
         current.activation_time = act;
         current.delay_time = del;
         current.light = light;

@@ -4,11 +4,9 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
-    <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
 
     <application
         android:name=".MyApplication"
@@ -27,12 +25,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".PinLockActivity" />
-        <activity android:name=".ActivateActivity" />
-        <activity android:name=".GeneralActivity" />
-        <activity android:name=".SensorsActivity" />
-        <activity android:name=".ActionActivity"></activity>
+        <service
+            android:name=".Others.MyService"
+            android:label="@string/serviceQ"/>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/action_settings" />
+        <activity
+            android:name=".PinLockActivity"
+            android:label="@string/action_pin" />
+        <activity
+            android:name=".ActivateActivity"
+            android:label="@string/action_activate" />
+        <activity
+            android:name=".GeneralActivity"
+            android:label="@string/action_gen" />
+        <activity
+            android:name=".SensorsActivity"
+            android:label="@string/action_sensors" />
+        <activity
+            android:name=".ActionActivity"
+            android:label="@string/action_actions" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/action_aboutus" />
     </application>
 
 </manifest>

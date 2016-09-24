@@ -14,6 +14,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Profile Name:"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_margin="16dp"/>
+
+        <EditText
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Set Activation Time:"
             android:textColor="#000"
             android:textSize="20sp"

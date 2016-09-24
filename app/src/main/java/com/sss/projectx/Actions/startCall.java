@@ -18,6 +18,7 @@ public class startCall {
         this.context = context;
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel: " + number));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions

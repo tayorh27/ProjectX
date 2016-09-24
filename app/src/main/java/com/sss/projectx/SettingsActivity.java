@@ -24,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
                         startActivity(new Intent(SettingsActivity.this, PinLockActivity.class));
                         break;
                     case 1:
+                        startActivity(new Intent(SettingsActivity.this, AboutActivity.class));
                         break;
                 }
             }

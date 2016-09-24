@@ -1,19 +1,15 @@
 package com.sss.projectx;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sss.projectx.Others.ClickListener;
-import com.sss.projectx.Others.CountDownClass;
 import com.sss.projectx.Others.Detail;
 import com.sss.projectx.Others.MainAdapter;
+import com.sss.projectx.Others.MyService;
+import com.sss.projectx.Others.NotificationBar;
 import com.sss.projectx.Others.UnitTime;
 import com.sss.projectx.Others.UserBase;
 
@@ -36,11 +33,8 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
     MainAdapter adapter;
     ArrayList<Detail> customData = new ArrayList<>();
     TextView tv;
+    MediaPlayer mediaPlayer;
 
-    private final String SENT = "Message Sent!";
-    private final String NOT_SENT = "Message not Sent!";
-    private final String DELIVERED = "Message Delivered!";
-    private final String NOT_DELIVERED = "Message Delivered!";
 
     float max, current;
 
@@ -81,6 +75,11 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void playSound(String path) {
+        mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.sound2);//Uri.parse("file://" + path)
+        mediaPlayer.start();
     }
 
     @Override
@@ -128,11 +127,27 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
 
     @Override
     public void onBackPressed() {
-        userBase.setLogged(false);
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setCancelable(true);
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("Are you sure you want to exit?");
+        alertDialog.setButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setButton2("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                userBase.setLogged(false);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
@@ -178,45 +193,6 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
         }
     }
 
-    public void startSms(String number, String text) {
-        PendingIntent sentPI = PendingIntent.getBroadcast(null, 0, new Intent(SENT), 0);
-        PendingIntent deliveredPI = PendingIntent.getBroadcast(null, 0, new Intent(DELIVERED), 0);
-
-        registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (getResultCode()) {
-                    case RESULT_OK:
-                        Toast.makeText(context, SENT, Toast.LENGTH_LONG).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                        Toast.makeText(context, NOT_SENT, Toast.LENGTH_LONG).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-                        Toast.makeText(context, NOT_SENT, Toast.LENGTH_LONG).show();
-                        break;
-                }
-            }
-        }, new IntentFilter(SENT));
-
-        registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (getResultCode()) {
-                    case RESULT_OK:
-                        Toast.makeText(context, DELIVERED, Toast.LENGTH_LONG).show();
-                        break;
-                    case RESULT_CANCELED:
-                        Toast.makeText(context, NOT_DELIVERED, Toast.LENGTH_LONG).show();
-                        break;
-                }
-            }
-        }, new IntentFilter(DELIVERED));
-
-        SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(number, null, text, sentPI, deliveredPI);
-    }
-
     @Override
     public void onClickListener(View view, int position) {
 
@@ -249,9 +225,17 @@ public class MainActivity extends AppCompatActivity implements ClickListener {
         if (current.unlock) {
             sensors += "unlock";
         }
-        CountDownClass countDownClass = new CountDownClass(MainActivity.this, actions, sensors, future, 1000);
-        countDownClass.start();
+        Intent intent = new Intent(MainActivity.this, MyService.class);
+        intent.putExtra("actions", actions);
+        intent.putExtra("sensors", sensors);
+        intent.putExtra("delay_time", current.delay_time);
+        intent.putExtra("future", future);
+        startService(intent);
+        //CountDownClass countDownClass = new CountDownClass(MainActivity.this, actions, sensors, current.delay_time, future, 1000);
+        //countDownClass.start();
         String text = current.profile + " has been activated";
+        NotificationBar notificationBar = new NotificationBar(MainActivity.this);
+        notificationBar.ShowNotification(text);
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
 }

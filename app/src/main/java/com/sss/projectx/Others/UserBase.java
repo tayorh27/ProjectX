@@ -96,6 +96,26 @@ public class UserBase {
         return preferences.getBoolean("logged", false);
     }
 
+    public void setPower(String power){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("power", power);
+        editor.apply();
+    }
+
+    public String getPower(){
+        return preferences.getString("power","");
+    }
+
+    public void setUnlock(String unlock){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("unlock", unlock);
+        editor.apply();
+    }
+
+    public String getUnlock(){
+        return preferences.getString("unlock","");
+    }
+
     public void clear() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
